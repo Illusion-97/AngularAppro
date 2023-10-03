@@ -1,0 +1,98 @@
+<div class="bg-gray-100 min-h-screen">
+  <!--TITLE-->
+  <header class="container mx-auto">
+    <div class="flex  items-center h-full">
+      <h1 class="text-gray-900 font-semibold uppercase text-4xl mt-5">
+        Comparateur</h1>
+    </div>
+  </header>
+
+  <section class="container mx-auto">
+    <!-- SEARCH BAR -->
+    <form (ngSubmit)="handleSubmit()" [formGroup]="searchForm" class="flex my-10">
+      <fieldset class="lg:flex relative shadow-md block w-full">
+        <legend></legend>
+        <div class="bg-white px-8 py-2 border-l-0 w-full lg:w-1/3">
+          <label class="block text-gray-700 font-bold mb-2" for="keyword">Mots-clés</label>
+          <input
+            class="w-full  py-2 text-gray-700  rounded-md focus:outline-none focus:shadow-outline"
+            formControlName="keywords"
+            id="keyword"
+            placeholder="React.js.."
+            type="text">
+          <span [class.text-red-700]="isInvalid('keywords')" [class.text-transparent]="!isInvalid('keywords')">
+            Le mot-clé doit contenir entre 3 et 100 caractères
+          </span>
+        </div>
+
+        <div class="bg-white px-8 py-2 border-l-2 w-full lg:w-1/3">
+          <label class="block text-gray-700 font-bold mb-2" for="priceMin">Prix Min (€)</label>
+          <input class="w-full px-3 py-2 text-gray-700  focus:outline-none focus:shadow-outline"
+                 formControlName="priceMin" id="priceMin" placeholder="0"
+                 type="number">
+          <span [class.text-red-700]="isInvalid('priceMin')" [class.text-transparent]="!isInvalid('priceMin')">
+            Le prix minimum doit être compris entre 0 et 20 000€
+          </span>
+        </div>
+
+        <div class="bg-white px-8 py-2 border-l-2 w-full lg:w-1/3">
+          <label class="block text-gray-700 font-bold mb-2" for="priceMax">Prix Max (€)</label>
+          <input class="w-full px-3 py-2 text-gray-700  focus:outline-none focus:shadow-outline"
+                 formControlName="priceMax" id="priceMax" placeholder="1500"
+                 type="number">
+          <span [class.text-red-700]="isInvalid('priceMax')" [class.text-transparent]="!isInvalid('priceMax')">
+            Le prix maximum doit être compris entre 0 et 20 000€
+          </span>
+        </div>
+        <button aria-label="Rechercher" class="bg-black p-5 absolute right-3 top-4 hover:bg-red-700">
+          <fa-icon [icon]="faMagnifyingGlass" class="text-white"></fa-icon>
+        </button>
+      </fieldset>
+    </form>
+
+    <!--  RESULT NUMBER -->
+    <div class="text-xl mb-5">
+      Resultats trouvé: <span class="text-2xl text-red-700 font-bold"> {{ totalItems  }} </span>
+    </div>
+
+    <!-- FILTER CLOSE -->
+    <div class="lg:flex lg:justify-center gap-6 block relative">
+      <!-- NO RESULT -->
+      <app-no-result [data]="formations" [loading]="loading"></app-no-result>
+      <!-- TRAINING CARD -->
+      <main
+        *ngIf="!loading && formations.length"
+        class="lg:w-3/4 w-full grid grid-cols-1 lg:grid-cols-2 gap-6 ">
+        <app-formation-card
+          *ngFor="let formation of formations "
+          [formation]="formation"></app-formation-card>
+      </main>
+      <!-- SKELETON CARD -->
+      <main
+        *ngIf="loading"
+        class="border-2 rounded-sm lg:w-3/4 w-full grid grid-cols-1 lg:grid-cols-2 gap-6 ">
+        <ng-container *ngFor="let index of [1,2,3,4,5,6,7,8]">
+          <app-formation-card-skeleton></app-formation-card-skeleton>
+        </ng-container>
+      </main>
+
+    </div>
+    <!-- PAGINATION -->
+
+    <div class="flex justify-center py-10">
+      <mat-paginator
+        (page)="pageChanged($event)"
+        *ngIf="formations.length"
+        [length]="totalItems"
+        [pageSizeOptions]="[10, 20, 30]"
+        [pageSize]="itemsPerPage.value"
+        aria-label="Choisir la page des formations"
+        class="border-2 rounded-sm"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+  </section>
+
+
+</div>
