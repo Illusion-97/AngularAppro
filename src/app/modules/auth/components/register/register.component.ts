@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MustMatch} from "../../validators/Validators";
 import {getControl} from "../../tools/ReactiveFormTools";
+import {AuthService} from "../../services/auth.service";
+import {RegisterFromValue} from "../../models/register-from-value";
 
 @Component({
   selector: 'app-register',
@@ -27,17 +29,19 @@ export class RegisterComponent {
     password: this.passwordControl
   });
 
+  constructor(private service: AuthService) {
+  }
+
   handleSubmit() {
     this.form.markAllAsTouched()
     if (this.confirmPasswordControl.valid && this.form.valid) {
-     /* this.authService.register(this.form.value).subscribe({
+     this.service.register(this.form.value).subscribe({
         next: () => {
-          /!*this.goLogin()*!/
         },
         error: err => {
           this.err = err;
         }
-      })*/
+      })
     }
   }
 

@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { RegisterComponent } from './components/register/register.component';
+import {HttpClientModule} from "@angular/common/http";
 
 const route : Routes = [
   {path: 'login', component: LoginComponent},
@@ -20,6 +21,7 @@ const route : Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatProgressSpinnerModule,
     RouterModule.forChild(route)
   ]
