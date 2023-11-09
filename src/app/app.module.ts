@@ -20,6 +20,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {AuthModule} from "./modules/auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -37,14 +38,15 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     NgOptimizedImage,
     FontAwesomeModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    AuthModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
