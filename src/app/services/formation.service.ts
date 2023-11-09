@@ -108,7 +108,7 @@ export class FormationService {
     let params = new HttpParams();
     if (filter.priceMin) params = params.set("price_gte", filter.priceMin);
     if (filter.priceMax) params = params.set("price_lte", filter.priceMax);
-    if (filter.keywords) params = params.set("price_gte", filter.keywords);
+    if (filter.keywords) params = params.set("title_like", filter.keywords);
     params = params.set("_start", page * size);
     params = params.set("_limit", size);
     return params;
