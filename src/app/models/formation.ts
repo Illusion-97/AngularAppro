@@ -34,10 +34,3 @@ export interface FiltersForm {
   priceMax: FormControl<number | null>,
   keywords: FormControl<string | null>,
 }
-
-export const INDEXED_PAGES_TABLE_DEFINITION: TableColumnDefinition<Formation>[] = [
-  {matColumnDef: "title", matHeader: "Titre"},
-  {matColumnDef: "trainingCenterName", matHeader: "Training Center"},
-  {matColumnDef: "duration", matHeader: "Durée"},
-  {matColumnDef: "price", matHeader: "Prix"}
-]

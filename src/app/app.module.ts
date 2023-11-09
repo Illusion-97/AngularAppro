@@ -17,6 +17,9 @@ import {TruncatePipe} from "./pipes/truncate.pipe";
 import {SafePipe} from "./pipes/safe.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { HeaderComponent } from './components/header/header.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import {HttpClientModule} from "@angular/common/http";
     FormationCardChipsComponent,
     TruncatePipe,
     SafePipe,
+    HeaderComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserAnimationsModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

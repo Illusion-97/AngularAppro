@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, combineLatest, finalize} from "rxjs";
+import {BehaviorSubject, combineLatest, finalize, skip} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {Formation, getFormationForm} from "../../models/formation";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
@@ -21,14 +21,22 @@ export class HomeComponent implements OnInit {
   error: string = '';
   itemsPerPage: BehaviorSubject<number> = new BehaviorSubject<number>(20);
   currentPage: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  totalItems?: number;
+  totalItems: number = 0;
   protected readonly faMagnifyingGlass = faMagnifyingGlass;
 
   constructor(
-    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private service: FormationService
   ) {
+    route.data.subscribe({
+      next : ({formations}) => {
+        const {content, total} = formations;
+        this.formations = content;
+        this.totalItems = total
+      },
+      error : () => {},
+      complete : () => {}
+    })
   }
 
   handleSubmit() {
@@ -56,6 +64,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     combineLatest([this.currentPage, this.itemsPerPage])
+      .pipe(skip(1))
       .subscribe(() => this.handleSubmit());
   }
 

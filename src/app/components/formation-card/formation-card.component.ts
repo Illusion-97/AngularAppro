@@ -13,7 +13,7 @@ export class FormationCardComponent {
   @Input() isFavorite: boolean = false;
   protected readonly faClock = faClock;
   protected readonly faMoneyBill = faMoneyBill;
-  protected readonly faCheck = faCheck;
+
 
   protected readonly faArrowRight = faArrowRight;
 
