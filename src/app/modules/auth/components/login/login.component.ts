@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {getControl} from "../../tools/ReactiveFormTools";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,22 @@ export class LoginComponent {
   loading: boolean = false
   form : FormGroup = new FormGroup<any>({
     email : new FormControl<string>("", {nonNullable: true, validators: [Validators.email, Validators.required]}),
-    password : new FormControl<string>("", [Validators.required, Validators.minLength(6)])
+    password : new FormControl<string>("", Validators.required)
   })
+
+  constructor(private service: AuthService) {
+  }
 
   handleLogin() {
     this.form.markAllAsTouched()
     if(this.form.valid) {
-      console.log(this.form.value)
+      this.service.login(this.form.value).subscribe({
+        next : username => {
+          console.log(username)
+        },
+        error : err => {
+          console.log(err.error)}
+      })
     }
   }
 

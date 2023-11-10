@@ -5,7 +5,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { RegisterComponent } from './components/register/register.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {TokenInterceptor} from "./interceptors/token.interceptor";
+import { BannerComponent } from './components/banner/banner.component';
 
 const route : Routes = [
   {path: 'login', component: LoginComponent},
@@ -16,7 +18,8 @@ const route : Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BannerComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +27,10 @@ const route : Routes = [
     HttpClientModule,
     MatProgressSpinnerModule,
     RouterModule.forChild(route)
+  ],
+  providers: [
+    // Je fournis à mon contexte un intercepteur par sa classe en lui permettant de travailler sur plusieurs requêtes
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
   ]
 })
 export class AuthModule { }

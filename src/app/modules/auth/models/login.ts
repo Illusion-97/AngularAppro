@@ -7,5 +7,5 @@ export interface Login {
 
 export interface LoginResponse {
   user: User,
-  token: string
+  accessToken: string
 }
