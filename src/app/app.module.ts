@@ -20,8 +20,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {AuthModule} from "./modules/auth/auth.module";
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import {ApproAuthModule} from "appro-auth";
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressBarModule,
-    AuthModule,
+    ApproAuthModule,
     AppRoutingModule
   ],
   providers: [],
