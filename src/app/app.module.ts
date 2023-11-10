@@ -21,6 +21,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {AuthModule} from "./modules/auth/auth.module";
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {AuthModule} from "./modules/auth/auth.module";
     SafePipe,
     HeaderComponent,
     LoaderComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
