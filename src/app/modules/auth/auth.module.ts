@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import { BannerComponent } from './components/banner/banner.component';
+import {NavDropdownComponent} from "./components/nav-dropdown/nav-dropdown.component";
 
 const route : Routes = [
   {path: 'login', component: LoginComponent},
@@ -19,8 +20,10 @@ const route : Routes = [
   declarations: [
     LoginComponent,
     RegisterComponent,
-    BannerComponent
+    BannerComponent,
+    NavDropdownComponent
   ],
+  exports: [BannerComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
