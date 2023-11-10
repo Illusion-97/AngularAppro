@@ -4,6 +4,7 @@ import {MustMatch} from "../../validators/Validators";
 import {getControl} from "../../tools/ReactiveFormTools";
 import {AuthService} from "../../services/auth.service";
 import {RegisterFromValue} from "../../models/register-from-value";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,7 @@ export class RegisterComponent {
     password: this.passwordControl
   });
 
-  constructor(private service: AuthService) {
+  constructor(private service: AuthService, private router: Router) {
   }
 
   handleSubmit() {
@@ -37,6 +38,7 @@ export class RegisterComponent {
     if (this.confirmPasswordControl.valid && this.form.valid) {
      this.service.register(this.form.value).subscribe({
         next: () => {
+          this.router.navigate(['/login'])
         },
         error: err => {
           this.err = err;
